@@ -8,7 +8,7 @@ def q1_memory(file_path: str) -> List[Tuple[datetime.date, str]]:
     Funcion que lee un archivo JSONL y encuentra las 10 fechas con mayor cantidad de tweets, para cada una de estas fechas entrega el usuario con mayor cantidad de tweets.
     
     Args:
-        file_path (str): Ruta del archivo JSONL que contiene los tweets para analisar.
+        file_path (str): Ruta del archivo JSONL que contiene los tweets para analizar.
     
     Returns:
         List[Tuple[datetime.date, str]]: Lista de tuplas, donde el primer elemento corresponde a la fecha y el segundo elemento al nombre del usuario.
