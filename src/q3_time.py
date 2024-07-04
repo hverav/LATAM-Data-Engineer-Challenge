@@ -25,10 +25,15 @@ def q3_time(file_path: str) -> List[Tuple[str, int]]:
             if mentioned_users:
                 # Se extraen todos los usuarios mensionados
                 data.extend([item['username'] for item in mentioned_users])
-    # creacion de dataframe
+    # Creacion de dataframe
     df = pl.DataFrame(data)
-    print(df)
+    # Analisis del dataframe
+    result = (df
+                .group_by('column_0') # se agrupa por la column_0, que es el username
+                .len() # Se cuentan los registros
+                .sort('len',descending=True) # Se ordenan de manera descendente
+                .head(10) # se retornan los 10 primeros registros
+    )
+    # Se formatea el output para que sea consistente con la descripcion de la funcion
+    result = [tuple(row.values()) for row in result.to_dicts()]
     return result
-
-f = q3_time('../data/farmers-protest-tweets-2021-2-4.json')
-print(f)
