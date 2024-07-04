@@ -1,2 +1,3 @@
 memory-profiler==0.61.0
 jsonlines==4.0.0
+polars==1.0.0
