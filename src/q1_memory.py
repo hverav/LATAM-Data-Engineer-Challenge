@@ -1,5 +1,5 @@
 import jsonlines
-from collections import Counter
+from collections import Counter, defaultdict
 from typing import List, Tuple
 from datetime import datetime
 
@@ -16,6 +16,7 @@ def q1_memory(file_path: str) -> List[Tuple[datetime.date, str]]:
     result = []
     # Contador para las fechas
     fecha_counter = Counter()
+    fecha_usuario_counter = defaultdict(Counter)
     # Lectura de archivo JSONL, se lee linea por linea para para reducir el uso de memoria
     with jsonlines.open(file_path) as reader:
         for obj in reader:
@@ -25,10 +26,23 @@ def q1_memory(file_path: str) -> List[Tuple[datetime.date, str]]:
             fecha = datetime.strptime(fecha_str, '%Y-%m-%d').date()
             # Se actualiza el contador de fechas
             fecha_counter[fecha] += 1
+            # Se actualiza el contador de usuarios por fechas
+            fecha_usuario_counter[fecha][obj.get('user', {}).get('username')] += 1
     
     # El top 10 de elementos mas comunes del contador
     top_fechas = fecha_counter.most_common(10)
-    print(top_fechas)
+    # Se itera por cada una de las fechas con mayor cantidad de tweets
+    for fecha in top_fechas:
+        usuarios = fecha_usuario_counter[fecha[0]]
+        usuario_mas_repetido = usuarios.most_common(1)[0][0]
+        result.append((fecha[0], usuario_mas_repetido))
+    
+    # Valido el output este de la forma requerida
+    print(type(result))
+    for i in result:
+        print(type(i))
+        print(type(i[0]),type(i[1]))
     return result
 
-q1_memory('../data/farmers-protest-tweets-2021-2-4.json')
+f = q1_memory('../data/farmers-protest-tweets-2021-2-4.json')
+print(f)
