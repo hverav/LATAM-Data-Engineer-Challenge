@@ -35,14 +35,6 @@ def q1_memory(file_path: str) -> List[Tuple[datetime.date, str]]:
     for fecha in top_fechas:
         usuarios = fecha_usuario_counter[fecha[0]]
         usuario_mas_repetido = usuarios.most_common(1)[0][0]
-        result.append((fecha[0], usuario_mas_repetido))
+        result.append((fecha[0], usuario_mas_repetido))    
     
-    # Valido el output este de la forma requerida
-    print(type(result))
-    for i in result:
-        print(type(i))
-        print(type(i[0]),type(i[1]))
     return result
-
-f = q1_memory('../data/farmers-protest-tweets-2021-2-4.json')
-print(f)
