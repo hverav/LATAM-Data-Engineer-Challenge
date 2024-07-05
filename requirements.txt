@@ -1,4 +1,5 @@
 memory-profiler==0.61.0
 jsonlines==4.0.0
 polars==1.0.0
-emoji==2.12.1
+emot==3.1
+pandas==2.2.2

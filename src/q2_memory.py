@@ -1,4 +1,4 @@
-import emoji
+import emot
 import jsonlines
 from collections import Counter
 from typing import List, Tuple
@@ -15,16 +15,18 @@ def q2_memory(file_path: str) -> List[Tuple[str, int]]:
     """
     # Contador para los emojis
     contador = Counter()
+    # Se genera un objeto emot.core.emot
+    emot_obj = emot.core.emot()
     # Lectura de archivo JSONL, se lee linea por linea para para reducir el uso de memoria
     with jsonlines.open(file_path) as reader:
         for obj in reader:
             # Se obtiene el objeto content que es donde esta el cuerpo del tweet
             content = obj.get('content')
             # Se obtiene la lista de diccionarios de los emojis encontrados en el texto
-            emojis = emoji.emoji_list(content)
-            if(emojis):
+            emojis = emot_obj.emoji(content)
+            if(emojis['value']):
                 # Si se encontraron emojis en el texto se almacena solo los emojis
-                emojis = [item['emoji'] for item in emojis]
+                emojis = [item for item in emojis['value']]
                 # Se actualiza el contador con la lista de emojis
                 contador.update(emojis)
     # Se retorna el top 10 de emojis
