@@ -1,16 +1,22 @@
-import jsonlines
 from typing import List, Tuple
 from collections import Counter
 
+import jsonlines
+
+
 def q3_time(file_path: str) -> List[Tuple[str, int]]:
     """
-    Funcion que lee un archivo JSONL y encuentra los 10 usuarios con mayor numero de menciones, prioriza el tiempo de ejecucion.
-    
+    Funcion que lee un archivo JSONL y encuentra los 10 usuarios con mayor 
+    numero de menciones, prioriza el tiempo de ejecucion.
+
     Args:
-        file_path (str): Ruta del archivo JSONL que contiene los tweets para analizar.
-    
+        file_path (str): Ruta del archivo JSONL que contiene los tweets 
+        para analizar.
+
     Returns:
-        List[Tuple[str, int]]: Lista de tuplas, donde el primer elemento corresponde al nombre de usuario y el segundo a la cantidad de menciones.
+        List[Tuple[str, int]]: Lista de tuplas, donde el primer 
+        elemento corresponde al nombre de usuario y el segundo a la cantidad 
+        de menciones.
     """
 
     # Lista que almacena la informacion en memoria linea por linea
